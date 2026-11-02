@@ -1,0 +1,6 @@
+{
+  "name": "Growth Falcon",
+  "description": "Tech-led cloud kitchen platform based in Bangalore, India uniting kitchens, data-driven marketing, and embedded partner bank financing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

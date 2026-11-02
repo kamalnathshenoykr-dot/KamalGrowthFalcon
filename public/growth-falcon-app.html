@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Growth Falcon — Bangalore Cloud Kitchen & FinTech Platform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #07111E;
+      color: #F1F5F9;
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0A192F;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1E293B;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+    .brand-falcon {
+      color: #FF5722;
+    }
+    .bg-falcon {
+      background-color: #FF5722;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-orange-500 selection:text-white">
+
+  <!-- ================= TOP NAVBAR ================= -->
+  <header class="sticky top-0 z-50 bg-[#0A192F] text-white border-b border-slate-800 shadow-xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        
+        <!-- Logo -->
+        <div onclick="switchView('overview')" class="flex items-center space-x-3 cursor-pointer group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#FF5722] to-[#FF8A65] flex items-center justify-center shadow-lg shadow-orange-500/20 group-hover:scale-105 transition-transform font-black text-xl">
+            🦅
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="font-extrabold text-lg tracking-tight text-white group-hover:text-orange-400 transition-colors">
+                GROWTH <span class="text-[#FF7043]">FALCON</span>
+              </span>
+              <span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+                Bengaluru
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-400 font-medium hidden sm:block">
+              Tech Kitchens • Data-Led Growth • Embedded FinTech
+            </p>
+          </div>
+        </div>
+
+        <!-- Main Nav Tabs -->
+        <nav class="hidden md:flex items-center space-x-1 bg-slate-900/80 p-1 rounded-xl border border-slate-800" id="main-nav">
+          <button onclick="switchView('overview')" id="nav-btn-overview" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#FF5722] text-white transition">Overview</button>
+          <button onclick="switchView('customer')" id="nav-btn-customer" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white transition">Customer</button>
+          <button onclick="switchView('kitchen')" id="nav-btn-kitchen" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white transition">Kitchen</button>
+          <button onclick="switchView('rider')" id="nav-btn-rider" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white transition">Rider</button>
+          <button onclick="switchView('marketing')" id="nav-btn-marketing" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white transition">Marketing</button>
+          <button onclick="switchView('finance')" id="nav-btn-finance" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white transition">Finance</button>
+        </nav>
+
+        <!-- Right Utilities -->
+        <div class="flex items-center space-x-2">
+          <!-- Live Activity Toggle -->
+          <button onclick="toggleDrawer('activity-drawer')" class="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition">
+            <span class="w-2 h-2 rounded-full bg-orange-500 animate-ping"></span>
+            <span class="hidden sm:inline">Live activity</span>
+          </button>
+
+          <!-- Notification Bell -->
+          <button onclick="toggleDrawer('notification-drawer')" class="relative p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition">
+            🔔
+            <span class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-500 text-white text-[10px] font-bold flex items-center justify-center">
+              3
+            </span>
+          </button>
+
+          <!-- Demo Burst Toggle -->
+          <button onclick="toggleDemoMode()" id="demo-toggle-btn" class="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-bold bg-slate-800 border border-slate-700 text-slate-300 hover:border-slate-600 transition">
+            <span>⚡ Demo:</span>
+            <span id="demo-status-text">OFF</span>
+          </button>
+
+          <!-- Direct Download HTML Button -->
+          <a href="growth-falcon-app.html" download="growth-falcon-app.html" class="hidden lg:flex items-center space-x-1 px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow transition" title="Download standalone HTML file to your computer">
+            <span>⬇ Download HTML</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Mobile Scrolling Nav -->
+      <div class="flex md:hidden overflow-x-auto py-2 space-x-1 border-t border-slate-800/80">
+        <button onclick="switchView('overview')" class="px-3 py-1 rounded text-xs bg-slate-800 text-white whitespace-nowrap">Overview</button>
+        <button onclick="switchView('customer')" class="px-3 py-1 rounded text-xs text-slate-400 whitespace-nowrap">Customer</button>
+        <button onclick="switchView('kitchen')" class="px-3 py-1 rounded text-xs text-slate-400 whitespace-nowrap">Kitchen</button>
+        <button onclick="switchView('rider')" class="px-3 py-1 rounded text-xs text-slate-400 whitespace-nowrap">Rider</button>
+        <button onclick="switchView('marketing')" class="px-3 py-1 rounded text-xs text-slate-400 whitespace-nowrap">Marketing</button>
+        <button onclick="switchView('finance')" class="px-3 py-1 rounded text-xs text-slate-400 whitespace-nowrap">Finance</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= MAIN CONTAINER ================= -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+
+    <!-- ================= VIEW 0: OVERVIEW ================= -->
+    <section id="view-overview" class="view-panel space-y-6 pb-12">
+      <!-- Header & Sub-Tabs -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+        <div>
+          <h1 class="text-2xl font-extrabold text-white tracking-tight">Growth Falcon Ecosystem</h1>
+          <p className="text-sm text-slate-400 mt-1">
+            Bangalore cloud kitchens generate data → data drives marketing → Partner Bank finances the ecosystem.
+          </p>
+        </div>
+
+        <div class="inline-flex p-1 bg-slate-900 border border-slate-800 rounded-xl self-start sm:self-auto">
+          <button onclick="switchOverviewTab('summary')" id="ov-tab-summary" class="px-4 py-1.5 text-xs font-semibold rounded-lg bg-[#FF5722] text-white">Summary</button>
+          <button onclick="switchOverviewTab('unit_economics')" id="ov-tab-unit_economics" class="px-4 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white">Unit Economics</button>
+          <button onclick="switchOverviewTab('how_it_works')" id="ov-tab-how_it_works" class="px-4 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white">How It Works</button>
+        </div>
+      </div>
+
+      <!-- Overview Tab: Summary -->
+      <div id="ov-panel-summary" class="space-y-6">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-sm space-y-1">
+            <span class="text-xs text-slate-400 font-medium">Orders Today</span>
+            <div class="text-2xl font-black text-white" id="ov-kpi-orders">1,289</div>
+            <p class="text-xs text-emerald-400 font-medium">+24% vs yesterday</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-sm space-y-1">
+            <span class="text-xs text-slate-400 font-medium">Avg Order Value</span>
+            <div class="text-2xl font-black text-white">₹420</div>
+            <p class="text-xs text-slate-400 font-medium">Bangalore cloud avg</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-sm space-y-1">
+            <span class="text-xs text-slate-400 font-medium">Customer Rating</span>
+            <div class="text-2xl font-black text-white">4.72 ★</div>
+            <p class="text-xs text-slate-400 font-medium">Across 3 virtual brands</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-sm space-y-1">
+            <span class="text-xs text-slate-400 font-medium">90-Day Repeat Rate</span>
+            <div class="text-2xl font-black text-white">58.4%</div>
+            <p class="text-xs text-emerald-400 font-medium">Industry baseline is 24%</p>
+          </div>
+        </div>
+
+        <!-- Demand Chart Card -->
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-base font-bold text-white">Hourly Order Demand & Kitchen Peak Load</h3>
+              <p class="text-xs text-slate-400">Order volumes across Koramangala, Indiranagar, HSR & Whitefield</p>
+            </div>
+            <span class="text-xs px-2.5 py-1 rounded bg-orange-950 text-orange-400 border border-orange-500/30">
+              Peak: 8 PM – 10 PM
+            </span>
+          </div>
+          <!-- Simplified SVG Bar Graph -->
+          <div class="h-48 flex items-end justify-between pt-6 px-2 gap-2 border-b border-slate-800">
+            <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full bg-slate-800 rounded-t h-12"></div><span class="text-[10px] text-slate-500">11AM</span></div>
+            <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full bg-orange-600/70 rounded-t h-28"></div><span class="text-[10px] text-slate-500">1PM</span></div>
+            <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full bg-slate-800 rounded-t h-16"></div><span class="text-[10px] text-slate-500">3PM</span></div>
+            <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full bg-slate-800 rounded-t h-20"></div><span class="text-[10px] text-slate-500">5PM</span></div>
+            <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full bg-orange-600/80 rounded-t h-32"></div><span class="text-[10px] text-slate-500">7PM</span></div>
+            <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full bg-orange-500 rounded-t h-44 shadow-lg shadow-orange-500/30"></div><span class="text-[10px] text-orange-400 font-bold">9PM</span></div>
+            <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full bg-orange-600/90 rounded-t h-36"></div><span class="text-[10px] text-slate-500">11PM</span></div>
+            <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full bg-slate-800 rounded-t h-20"></div><span class="text-[10px] text-slate-500">1AM</span></div>
+          </div>
+          <div class="flex justify-between text-xs text-slate-400 pt-1">
+            <span>Real-time kitchen load monitored</span>
+            <button onclick="switchView('kitchen')" class="text-orange-400 font-semibold hover:underline">Go to Kitchen Dashboard →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Overview Tab: Unit Economics -->
+      <div id="ov-panel-unit_economics" class="hidden space-y-6">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+            <span class="text-xs text-slate-400">Direct Order Margin</span>
+            <div class="text-2xl font-black text-emerald-400">₹193.20</div>
+            <p class="text-xs text-emerald-400/90 font-medium">46.0% net contribution</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+            <span class="text-xs text-slate-400">Aggregator Margin</span>
+            <div class="text-2xl font-black text-rose-400">₹75.60</div>
+            <p class="text-xs text-rose-400/90 font-medium">18.0% net contribution</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+            <span class="text-xs text-slate-400">Margin Multiplier</span>
+            <div class="text-2xl font-black text-white">2.55x</div>
+            <p class="text-xs text-slate-400 font-medium">Direct vs Swiggy/Zomato</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+            <span class="text-xs text-slate-400">Direct Volume Share</span>
+            <div class="text-2xl font-black text-orange-400">38%</div>
+            <p class="text-xs text-slate-400 font-medium">Zero-commission channel</p>
+          </div>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
+          <h3 class="text-base font-bold text-white">Unit Economics Comparison (₹420 Basket)</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/40 space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-white text-sm">Direct App Channel</span>
+                <span class="px-2 py-0.5 rounded bg-emerald-500 text-black text-xs font-bold">46.0% Margin</span>
+              </div>
+              <div class="space-y-1.5 text-xs text-slate-300">
+                <div class="flex justify-between"><span>Food Cost (28%):</span><span>₹118</span></div>
+                <div class="flex justify-between"><span>Packaging (6%):</span><span>₹25</span></div>
+                <div class="flex justify-between"><span>EV Delivery (13%):</span><span>₹55</span></div>
+                <div class="flex justify-between text-emerald-400 font-bold"><span>Aggregator Commission:</span><span>₹0 (0%)</span></div>
+                <div class="flex justify-between"><span>Marketing & Gateway:</span><span>₹29</span></div>
+                <div class="flex justify-between pt-2 border-t border-slate-800 font-bold text-emerald-400 text-sm">
+                  <span>Net Platform Profit:</span><span>₹193.20</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-white text-sm">Aggregator Channel (Swiggy/Zomato)</span>
+                <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 text-xs font-bold border border-rose-800">18.0% Margin</span>
+              </div>
+              <div class="space-y-1.5 text-xs text-slate-300">
+                <div class="flex justify-between"><span>Food Cost (28%):</span><span>₹118</span></div>
+                <div class="flex justify-between"><span>Packaging (6%):</span><span>₹25</span></div>
+                <div class="flex justify-between"><span>Delivery:</span><span>₹59</span></div>
+                <div class="flex justify-between text-rose-400 font-bold"><span>Aggregator Take-Rate (22%):</span><span>₹92.40</span></div>
+                <div class="flex justify-between"><span>Platform Ad Bids:</span><span>₹50</span></div>
+                <div class="flex justify-between pt-2 border-t border-slate-800 font-bold text-slate-200 text-sm">
+                  <span>Net Profit:</span><span>₹75.60</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Overview Tab: How It Works -->
+      <div id="ov-panel-how_it_works" class="hidden space-y-6">
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
+          <h3 class="text-base font-bold text-white">The Growth Falcon Value Loop (Interactive Flywheel)</h3>
+          <p class="text-xs text-slate-400">Click any stage in the ecosystem to open its operational dashboard:</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+            <div onclick="switchView('customer')" class="p-4 bg-orange-950/20 border border-orange-500/40 rounded-xl cursor-pointer hover:border-orange-500 transition space-y-2">
+              <span class="text-xs font-mono text-orange-400">Step 01</span>
+              <h4 class="font-bold text-white text-sm">1. Order Capture</h4>
+              <p class="text-xs text-slate-300 leading-relaxed">Direct App, ONDC & WhatsApp orders routed to nearest Bangalore kitchen hub.</p>
+              <span class="text-orange-400 text-xs font-bold block pt-1">Open Customer App →</span>
+            </div>
+
+            <div onclick="switchView('kitchen')" class="p-4 bg-amber-950/20 border border-amber-500/40 rounded-xl cursor-pointer hover:border-amber-500 transition space-y-2">
+              <span class="text-xs font-mono text-amber-400">Step 02</span>
+              <h4 class="font-bold text-white text-sm">2. Kitchen Ops</h4>
+              <p class="text-xs text-slate-300 leading-relaxed">Shared capacity cooks 3 virtual brands with travel-rated packaging & SLA tracking.</p>
+              <span class="text-amber-400 text-xs font-bold block pt-1">Open Kitchen Board →</span>
+            </div>
+
+            <div onclick="switchView('rider')" class="p-4 bg-emerald-950/20 border border-emerald-500/40 rounded-xl cursor-pointer hover:border-emerald-500 transition space-y-2">
+              <span class="text-xs font-mono text-emerald-400">Step 03</span>
+              <h4 class="font-bold text-white text-sm">3. EV Delivery</h4>
+              <p class="text-xs text-slate-300 leading-relaxed">12 riders delivering under 27 mins across Koramangala, Indiranagar, HSR & Whitefield.</p>
+              <span class="text-emerald-400 text-xs font-bold block pt-1">Open Rider App →</span>
+            </div>
+
+            <div onclick="switchView('marketing')" class="p-4 bg-cyan-950/20 border border-cyan-500/40 rounded-xl cursor-pointer hover:border-cyan-500 transition space-y-2">
+              <span class="text-xs font-mono text-cyan-400">Step 04</span>
+              <h4 class="font-bold text-white text-sm">4. Granular Data</h4>
+              <p class="text-xs text-slate-300 leading-relaxed">Pin code demand, SKU margins, travel scores, and customer reorder intervals.</p>
+              <span class="text-cyan-400 text-xs font-bold block pt-1">Open Analytics →</span>
+            </div>
+
+            <div onclick="switchView('marketing')" class="p-4 bg-pink-950/20 border border-pink-500/40 rounded-xl cursor-pointer hover:border-pink-500 transition space-y-2">
+              <span class="text-xs font-mono text-pink-400">Step 05</span>
+              <h4 class="font-bold text-white text-sm">5. AI Marketing</h4>
+              <p class="text-xs text-slate-300 leading-relaxed">WhatsApp AI nudges re-engage lapsed diners at peak conversion windows.</p>
+              <span class="text-pink-400 text-xs font-bold block pt-1">Open Campaigns →</span>
+            </div>
+
+            <div onclick="switchView('finance')" class="p-4 bg-indigo-950/20 border border-indigo-500/40 rounded-xl cursor-pointer hover:border-indigo-500 transition space-y-2">
+              <span class="text-xs font-mono text-indigo-400">Step 06</span>
+              <h4 class="font-bold text-white text-sm">6. Partner Bank</h4>
+              <p class="text-xs text-slate-300 leading-relaxed">Partner Bank underwrites revolving working capital & EWA using cash flow data.</p>
+              <span class="text-indigo-400 text-xs font-bold block pt-1">Open Finance Hub →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 1: CUSTOMER APP ================= -->
+    <section id="view-customer" class="view-panel hidden space-y-6 pb-12">
+      <!-- Header & Sub-Tabs -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+        <div>
+          <h1 class="text-2xl font-extrabold text-white tracking-tight">Customer Direct Ordering</h1>
+          <p class="text-sm text-slate-400 mt-0.5">5% Falcon Coins cashback, zero commissions, and fresh Bangalore kitchen prep.</p>
+        </div>
+
+        <div class="inline-flex p-1 bg-slate-900 border border-slate-800 rounded-xl self-start sm:self-auto">
+          <button onclick="switchCustomerTab('order')" id="cust-tab-order" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-[#FF5722] text-white">Order</button>
+          <button onclick="switchCustomerTab('track')" id="cust-tab-track" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white">Track (Live)</button>
+          <button onclick="switchCustomerTab('wallet')" id="cust-tab-wallet" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white">Wallet (₹380)</button>
+          <button onclick="switchCustomerTab('reviews')" id="cust-tab-reviews" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white">Reviews</button>
+        </div>
+      </div>
+
+      <!-- Customer Tab: Order -->
+      <div id="cust-panel-order" class="space-y-6">
+        <!-- Brand Selector -->
+        <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-3">
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Choose Virtual Brand</span>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <button onclick="selectBrand('thali-theory')" id="brand-btn-thali" class="p-4 rounded-xl border border-orange-500 bg-orange-950/20 text-left">
+              <div class="flex justify-between mb-1"><span class="text-2xl">🍱</span><span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-300">Heritage</span></div>
+              <h3 class="font-bold text-white text-sm">Thali Theory</h3>
+              <p class="text-xs text-slate-400">Authentic South Indian meals & filter coffee</p>
+            </button>
+            <button onclick="selectBrand('bowl-republic')" id="brand-btn-bowl" class="p-4 rounded-xl border border-slate-800 bg-slate-950 text-left">
+              <div class="flex justify-between mb-1"><span class="text-2xl">🥗</span><span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-300">Healthy</span></div>
+              <h3 class="font-bold text-white text-sm">Bowl Republic</h3>
+              <p class="text-xs text-slate-400">High-protein millets, quinoa & salads</p>
+            </button>
+            <button onclick="selectBrand('midnight-maska')" id="brand-btn-midnight" class="p-4 rounded-xl border border-slate-800 bg-slate-950 text-left">
+              <div class="flex justify-between mb-1"><span class="text-2xl">🌯</span><span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-300">Comfort</span></div>
+              <h3 class="font-bold text-white text-sm">Midnight Maska</h3>
+              <p class="text-xs text-slate-400">Late-night kathi rolls & dum biryani</p>
+            </button>
+          </div>
+        </div>
+
+        <!-- Menu Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="customer-menu-items">
+          <!-- Item 1 -->
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex flex-col justify-between space-y-3">
+            <div>
+              <div class="flex justify-between items-start">
+                <span class="text-2xl">🍱</span>
+                <span class="text-[10px] text-slate-400 font-mono">Prep 12m · Travel 4.8/5</span>
+              </div>
+              <h4 class="font-bold text-white text-base mt-2">Royal Karnataka Utsav Thali</h4>
+              <p class="text-xs text-slate-400 mt-1">Bisi bele bath, Mysore pak, curd rice, kosambari & poori packed in leakproof compartments.</p>
+            </div>
+            <div class="flex justify-between items-center pt-2 border-t border-slate-800">
+              <span class="text-lg font-black text-white">₹329</span>
+              <button onclick="addToCart('Royal Karnataka Utsav Thali', 329)" class="px-4 py-1.5 bg-orange-600 hover:bg-orange-500 text-white rounded-lg text-xs font-bold shadow">Add +</button>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex flex-col justify-between space-y-3">
+            <div>
+              <div class="flex justify-between items-start">
+                <span class="text-2xl">☕</span>
+                <span class="text-[10px] text-slate-400 font-mono">Prep 5m · Travel 5.0/5</span>
+              </div>
+              <h4 class="font-bold text-white text-base mt-2">Malgudi Filter Coffee Flask (500ml)</h4>
+              <p class="text-xs text-slate-400 mt-1">Traditional 80:20 chicory blend in thermal insulation pouch. Arrives steaming hot.</p>
+            </div>
+            <div class="flex justify-between items-center pt-2 border-t border-slate-800">
+              <span class="text-lg font-black text-white">₹199</span>
+              <button onclick="addToCart('Malgudi Filter Coffee Flask', 199)" class="px-4 py-1.5 bg-orange-600 hover:bg-orange-500 text-white rounded-lg text-xs font-bold shadow">Add +</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Basket Notification -->
+        <div id="customer-cart-bar" class="p-4 bg-[#0F1E36] border border-orange-500/40 rounded-2xl flex items-center justify-between shadow-2xl">
+          <div>
+            <p class="text-xs text-slate-300 font-semibold"><span id="cart-count">2 items</span> in basket · Total: <span class="text-emerald-400 font-bold" id="cart-total">₹528</span></p>
+            <p class="text-[11px] text-orange-400">Save ₹116 vs aggregator delivery toll</p>
+          </div>
+          <button onclick="checkoutOrder()" class="px-5 py-2.5 bg-orange-600 hover:bg-orange-500 text-white text-xs font-bold rounded-xl shadow-lg transition">Checkout via UPI →</button>
+        </div>
+      </div>
+
+      <!-- Customer Tab: Track -->
+      <div id="cust-panel-track" class="hidden space-y-6">
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-6">
+          <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-xs font-bold px-2 py-0.5 rounded bg-orange-600 text-white">Live Tracking</span>
+              <h3 class="text-base font-bold text-white mt-1">Order #GF-9481 • Thali Theory</h3>
+            </div>
+            <button onclick="advanceOrderStatus()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold">Simulate Next Stage →</button>
+          </div>
+
+          <!-- 4 Steps -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div class="p-3.5 rounded-xl border border-emerald-500/40 bg-slate-950 text-emerald-400">
+              <p class="text-[10px] text-slate-400 uppercase font-bold">Step 01</p>
+              <p class="text-xs font-bold">Placed</p>
+            </div>
+            <div id="track-step-prep" class="p-3.5 rounded-xl border border-orange-500 bg-orange-950/30 text-orange-300 ring-1 ring-orange-500">
+              <p class="text-[10px] text-slate-400 uppercase font-bold">Step 02</p>
+              <p class="text-xs font-bold">Preparing (In Hub)</p>
+            </div>
+            <div id="track-step-ride" class="p-3.5 rounded-xl border border-slate-800 bg-slate-950 text-slate-500">
+              <p class="text-[10px] text-slate-400 uppercase font-bold">Step 03</p>
+              <p class="text-xs font-bold">Out for Delivery</p>
+            </div>
+            <div id="track-step-drop" class="p-3.5 rounded-xl border border-slate-800 bg-slate-950 text-slate-500">
+              <p class="text-[10px] text-slate-400 uppercase font-bold">Step 04</p>
+              <p class="text-xs font-bold">Delivered</p>
+            </div>
+          </div>
+
+          <!-- Assigned Rider Card -->
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 flex justify-between items-center text-xs">
+            <div class="flex items-center space-x-3">
+              <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-lg">🛵</div>
+              <div>
+                <p class="font-bold text-white">Ramesh Kumar (EV Partner)</p>
+                <p class="text-slate-400 text-[11px]">Ather 450X · 4.9★ (1,240 trips)</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="text-slate-400 text-[11px] block">Customer OTP</span>
+              <span class="text-base font-mono font-bold text-emerald-400">9481</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer Tab: Wallet -->
+      <div id="cust-panel-wallet" class="hidden space-y-6">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+            <span class="text-xs text-slate-400">Falcon Coins Balance</span>
+            <div class="text-2xl font-black text-amber-400">₹380</div>
+            <p class="text-xs text-slate-400">1 Coin = ₹1 Rupee</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+            <span class="text-xs text-slate-400">Cashback Rate</span>
+            <div class="text-2xl font-black text-emerald-400">5.0%</div>
+            <p class="text-xs text-slate-400">On all direct orders</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+            <span class="text-xs text-slate-400">Lifetime Saved</span>
+            <div class="text-2xl font-black text-white">₹1,840</div>
+            <p class="text-xs text-slate-400">Vs Swiggy/Zomato toll</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+            <span class="text-xs text-slate-400">Corporate Pass</span>
+            <div class="text-2xl font-black text-indigo-400">Active</div>
+            <p class="text-xs text-slate-400">Mon-Fri desk delivery</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer Tab: Reviews -->
+      <div id="cust-panel-reviews" class="hidden space-y-6">
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
+          <h3 class="text-base font-bold text-white">Verified Diner Reviews</h3>
+          <div class="space-y-3">
+            <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 text-xs space-y-1">
+              <div class="flex justify-between font-bold text-white"><span>Tanmay Saxena · Midnight Maska</span><span class="text-amber-400">5★ (Bellandur)</span></div>
+              <p class="text-slate-300 italic">"Chai flask was burning hot and brownie was molten perfection. Super fast delivery!"</p>
+            </div>
+            <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 text-xs space-y-1">
+              <div class="flex justify-between font-bold text-white"><span>Aishwarya Iyer · Thali Theory</span><span class="text-amber-400">5★ (Koramangala)</span></div>
+              <p class="text-slate-300 italic">"Authentic taste like traditional Bangalore weddings. Loved the leakproof sections."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 2: KITCHEN DASHBOARD ================= -->
+    <section id="view-kitchen" class="view-panel hidden space-y-6 pb-12">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+        <div>
+          <h1 class="text-2xl font-extrabold text-white tracking-tight">Kitchen Operations</h1>
+          <p class="text-xs text-slate-400 mt-0.5">Active Hub: <strong class="text-white">Koramangala Master Kitchen (Owned Hub)</strong></p>
+        </div>
+
+        <div class="inline-flex p-1 bg-slate-900 border border-slate-800 rounded-xl self-start sm:self-auto overflow-x-auto">
+          <button onclick="switchKitchenTab('live_orders')" id="kt-tab-live_orders" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#FF5722] text-white">Live Orders (4)</button>
+          <button onclick="switchKitchenTab('performance')" id="kt-tab-performance" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white">Performance</button>
+          <button onclick="switchKitchenTab('inventory')" id="kt-tab-inventory" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white">Inventory</button>
+          <button onclick="switchKitchenTab('hygiene')" id="kt-tab-hygiene" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white">Hygiene (100%)</button>
+          <button onclick="switchKitchenTab('fleet')" id="kt-tab-fleet" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white">Fleet Ops</button>
+        </div>
+      </div>
+
+      <!-- Kitchen Tab: Live Orders (Kanban Only) -->
+      <div id="kt-panel-live_orders" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <!-- New -->
+        <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-3">
+          <div class="flex justify-between border-b border-slate-800 pb-2 text-xs font-bold text-slate-300">
+            <span>New Placed (1)</span><span class="w-2 h-2 rounded-full bg-blue-400"></span>
+          </div>
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 text-xs space-y-2">
+            <span class="font-mono text-white font-bold">#GF-9487</span>
+            <p class="text-orange-400 font-bold">Bowl Republic</p>
+            <p class="text-slate-400 text-[11px]">Nutty Brown Rice & Dal Makhani</p>
+            <button onclick="alert('Order accepted into preparation station!')" class="w-full py-1 bg-orange-600 hover:bg-orange-500 text-white rounded text-xs font-bold">Start Prep →</button>
+          </div>
+        </div>
+
+        <!-- Preparing -->
+        <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-3">
+          <div class="flex justify-between border-b border-slate-800 pb-2 text-xs font-bold text-amber-400">
+            <span>Preparing (1)</span><span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+          </div>
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 text-xs space-y-2">
+            <div class="flex justify-between"><span class="font-mono text-white font-bold">#GF-9481</span><span class="text-amber-400 font-bold">14m / 12m</span></div>
+            <p class="text-orange-400 font-bold">Thali Theory</p>
+            <p class="text-slate-400 text-[11px]">2x Royal Karnataka Thali</p>
+            <button onclick="alert('Order marked ready for rider pickup!')" class="w-full py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded text-xs font-bold">Mark Ready →</button>
+          </div>
+        </div>
+
+        <!-- Ready -->
+        <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-3">
+          <div class="flex justify-between border-b border-slate-800 pb-2 text-xs font-bold text-emerald-400">
+            <span>Ready for Pickup (1)</span><span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          </div>
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 text-xs space-y-2">
+            <span class="font-mono text-white font-bold">#GF-9482</span>
+            <p class="text-orange-400 font-bold">Bowl Republic</p>
+            <p class="text-slate-300 text-[11px]">Rider: Priya Nair (Indiranagar)</p>
+            <button onclick="alert('Order handed over to rider!')" class="w-full py-1 bg-blue-600 hover:bg-blue-500 text-white rounded text-xs font-bold">Handover to Rider →</button>
+          </div>
+        </div>
+
+        <!-- Dispatched -->
+        <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-3">
+          <div class="flex justify-between border-b border-slate-800 pb-2 text-xs font-bold text-indigo-400">
+            <span>Dispatched (1)</span><span class="w-2 h-2 rounded-full bg-indigo-400"></span>
+          </div>
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 text-xs space-y-1">
+            <span class="font-mono text-white font-bold">#GF-9483</span>
+            <p class="text-slate-300">Rider: Sunil Gowda</p>
+            <p class="text-slate-500 text-[11px]">En route to HSR Sector 1</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kitchen Tab: Performance -->
+      <div id="kt-panel-performance" class="hidden space-y-6">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+            <span class="text-xs text-slate-400">Avg Prep Time</span>
+            <div class="text-2xl font-black text-white">10.8m</div>
+            <p class="text-xs text-emerald-400 font-medium">Target 12m (-1.2m)</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+            <span class="text-xs text-slate-400">On-Time SLA</span>
+            <div class="text-2xl font-black text-emerald-400">94.8%</div>
+            <p class="text-xs text-slate-400 font-medium">+3.2% vs last month</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+            <span class="text-xs text-slate-400">Peak Load Volume</span>
+            <div class="text-2xl font-black text-amber-400">128 ord/hr</div>
+            <p class="text-xs text-slate-400 font-medium">9 PM peak load</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+            <span class="text-xs text-slate-400">Kitchen Margin</span>
+            <div class="text-2xl font-black text-emerald-400">38.2%</div>
+            <p class="text-xs text-slate-400 font-medium">Shared efficiency</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kitchen Tab: Inventory -->
+      <div id="kt-panel-inventory" class="hidden space-y-6">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+            <span class="text-xs text-slate-400">Today's Wastage</span>
+            <div class="text-2xl font-black text-rose-400">14.3 kg</div>
+            <p class="text-xs text-slate-400 font-medium">1.8% of daily ingredients</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+            <span class="text-xs text-slate-400">Wastage Cost</span>
+            <div class="text-2xl font-black text-white">₹1,889</div>
+            <p class="text-xs text-emerald-400 font-medium">-38% vs standalone</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+            <span class="text-xs text-slate-400">Stock-Out Risks</span>
+            <div class="text-2xl font-black text-amber-400">3 SKUs</div>
+            <p class="text-xs text-slate-400 font-medium">Below reorder point</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+            <span class="text-xs text-slate-400">Inventory Health</span>
+            <div class="text-2xl font-black text-emerald-400">96.4%</div>
+            <p class="text-xs text-slate-400 font-medium">Cold chain certified</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kitchen Tab: Hygiene -->
+      <div id="kt-panel-hygiene" class="hidden space-y-6">
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
+          <h3 class="text-base font-bold text-white">Daily Bangalore Cloud Hygiene Checklist</h3>
+          <div class="space-y-2 text-xs">
+            <label class="p-3 bg-slate-950 rounded-xl border border-slate-800 flex items-center space-x-3 cursor-pointer">
+              <input type="checkbox" checked class="accent-emerald-500 w-4 h-4">
+              <span class="text-white">Cold storage temp probe verified (-18.4°C freezer, 3.2°C chillers)</span>
+            </label>
+            <label class="p-3 bg-slate-950 rounded-xl border border-slate-800 flex items-center space-x-3 cursor-pointer">
+              <input type="checkbox" checked class="accent-emerald-500 w-4 h-4">
+              <span class="text-white">Surface sanitization with food-grade quaternary ammonium solution</span>
+            </label>
+            <label class="p-3 bg-slate-950 rounded-xl border border-slate-800 flex items-center space-x-3 cursor-pointer">
+              <input type="checkbox" checked class="accent-emerald-500 w-4 h-4">
+              <span class="text-white">Staff thermal check, hairnets, aprons, nitrile gloves verified</span>
+            </label>
+            <label class="p-3 bg-slate-950 rounded-xl border border-slate-800 flex items-center space-x-3 cursor-pointer">
+              <input type="checkbox" checked class="accent-emerald-500 w-4 h-4">
+              <span class="text-white">Oil TPM digital meter check (&lt; 14.2% total polar materials)</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kitchen Tab: Fleet Ops -->
+      <div id="kt-panel-fleet" class="hidden space-y-6">
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
+          <h3 class="text-base font-bold text-white">Fleet Telemetry & Wait Times</h3>
+          <p class="text-xs text-slate-400">12 Bangalore delivery riders active across Koramangala, Indiranagar, HSR & Whitefield.</p>
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 text-xs flex justify-between items-center">
+            <span>Average Pickup Wait Time at Hub: <strong class="text-emerald-400">4.2 mins</strong></span>
+            <button onclick="switchView('rider')" class="px-3 py-1.5 bg-orange-600 hover:bg-orange-500 text-white rounded-lg font-bold">Open Rider App Console →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 3: RIDER APP (MOBILE FRAME) ================= -->
+    <section id="view-rider" class="view-panel hidden flex flex-col items-center justify-center pb-12">
+      <!-- Persona Switcher -->
+      <div class="w-full max-w-[390px] mb-3 bg-slate-900 border border-slate-800 p-2.5 rounded-2xl flex items-center justify-between text-xs">
+        <div class="flex items-center space-x-1.5">
+          <span>🛵</span>
+          <select id="rider-persona-select" onchange="changeRiderPersona(this.value)" class="bg-slate-800 text-white font-bold rounded px-2 py-1 border border-slate-700">
+            <option value="Ramesh Kumar">Ramesh Kumar (EV · Koramangala)</option>
+            <option value="Priya Nair">Priya Nair (EV · Indiranagar)</option>
+            <option value="Sunil Gowda">Sunil Gowda (EV · HSR)</option>
+          </select>
+        </div>
+        <span class="text-[10px] text-emerald-400 font-bold px-2 py-0.5 rounded bg-emerald-950 border border-emerald-800">Online</span>
+      </div>
+
+      <!-- Mobile Shell -->
+      <div class="relative w-full max-w-[390px] bg-[#07111E] border-[5px] border-slate-800 rounded-[44px] shadow-2xl flex flex-col min-h-[640px] overflow-hidden">
+        <!-- Status Bar -->
+        <div class="bg-[#0A192F] px-6 pt-3 pb-2 flex items-center justify-between text-[11px] text-slate-300 font-mono">
+          <span>12:45</span>
+          <div class="w-16 h-3.5 bg-black rounded-full"></div>
+          <span>82% 🔋</span>
+        </div>
+
+        <!-- Phone Body -->
+        <div class="flex-1 p-4 overflow-y-auto space-y-4">
+          <!-- Rider Tab: Orders -->
+          <div id="rider-sub-orders" class="space-y-4">
+            <div class="flex justify-between items-center text-[10px] text-slate-400 font-mono">
+              <span class="text-orange-400 font-bold">1. Reach Hub</span>
+              <span>→</span>
+              <span>2. Pickup</span>
+              <span>→</span>
+              <span>3. Customer</span>
+            </div>
+
+            <!-- Single Focused Step Card -->
+            <div class="p-5 bg-slate-900 border border-slate-800 rounded-2xl space-y-4">
+              <div class="flex justify-between items-start">
+                <div>
+                  <span class="text-[10px] font-bold text-orange-400 uppercase">Current Step</span>
+                  <h3 class="text-base font-bold text-white mt-0.5" id="rider-step-title">Go to Kitchen Hub</h3>
+                </div>
+                <span class="text-xs font-bold text-emerald-400">ETA 6m</span>
+              </div>
+
+              <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 text-xs space-y-1">
+                <p class="font-bold text-white">Koramangala Master Kitchen</p>
+                <p class="text-slate-400 text-[11px]">80ft Road, 4th Block · Thali Theory</p>
+                <p class="text-emerald-400 text-[11px] font-bold pt-1">Prepaid Order · ₹85 Payout</p>
+              </div>
+
+              <button onclick="advanceRiderFlow()" id="rider-step-action-btn" class="w-full py-3 bg-orange-600 hover:bg-orange-500 text-white font-bold rounded-xl text-xs shadow-lg transition">
+                I Have Arrived at Kitchen →
+              </button>
+            </div>
+
+            <button onclick="alert('Exception report drawer: Food delay, Spilled food, Customer unreachable, Breakdown, Rain surge (+₹25). Operations alerted!')" class="w-full py-2.5 bg-slate-900 border border-slate-800 text-rose-400 rounded-xl text-xs font-semibold">
+              ⚠️ Report an Issue (12 Exceptions)
+            </button>
+          </div>
+
+          <!-- Rider Tab: Home -->
+          <div id="rider-sub-home" class="hidden space-y-4">
+            <div class="p-5 bg-gradient-to-br from-slate-900 to-[#0F1E36] border border-slate-800 rounded-2xl space-y-2">
+              <span class="text-xs text-slate-400">Today's Earnings</span>
+              <div class="text-3xl font-black text-white">₹940</div>
+              <p class="text-xs text-emerald-400 font-semibold">14 Trips · ₹150 Peak Bonus Active</p>
+            </div>
+          </div>
+
+          <!-- Rider Tab: Earnings -->
+          <div id="rider-sub-earnings" class="hidden space-y-4">
+            <div class="p-5 bg-slate-900 border border-slate-800 rounded-2xl space-y-3">
+              <span class="text-xs text-slate-400">Withdrawable Balance (EWA)</span>
+              <div class="text-2xl font-black text-white">₹3,840</div>
+              <button onclick="alert('Instant EWA cashout of ₹3,840 initiated to UPI ID ramesh@okhdfcbank!')" class="w-full py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold">Instant UPI Cashout</button>
+            </div>
+          </div>
+
+          <!-- Rider Tab: Safety -->
+          <div id="rider-sub-safety" class="hidden space-y-4">
+            <button onclick="alert('EMERGENCY SOS: Dispatch team & local patrol alerted with live GPS coordinates!')" class="w-full py-4 bg-rose-600 text-white font-black text-sm rounded-2xl animate-pulse shadow-lg shadow-rose-600/30">
+              🚨 EMERGENCY SOS BROADCAST
+            </button>
+          </div>
+
+          <!-- Rider Tab: Profile -->
+          <div id="rider-sub-profile" class="hidden space-y-2 text-xs">
+            <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 flex justify-between"><span>Driving Licence:</span><span class="text-emerald-400 font-bold">Verified</span></div>
+            <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 flex justify-between"><span>Vehicle RC:</span><span class="text-emerald-400 font-bold">Ather 450X</span></div>
+            <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 flex justify-between"><span>Tier Status:</span><span class="text-amber-400 font-bold">Gold Partner</span></div>
+          </div>
+        </div>
+
+        <!-- Phone Bottom Bar -->
+        <div class="bg-[#0A192F] border-t border-slate-800 px-2 py-2 flex justify-around text-[10px] text-slate-400">
+          <button onclick="switchRiderSub('home')" class="p-1 hover:text-white">Home</button>
+          <button onclick="switchRiderSub('orders')" class="p-1 text-orange-500 font-bold">Orders</button>
+          <button onclick="switchRiderSub('earnings')" class="p-1 hover:text-white">Earnings</button>
+          <button onclick="switchRiderSub('safety')" class="p-1 hover:text-white">Safety</button>
+          <button onclick="switchRiderSub('profile')" class="p-1 hover:text-white">Profile</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 4: MARKETING ================= -->
+    <section id="view-marketing" class="view-panel hidden space-y-6 pb-12">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+        <div>
+          <h1 class="text-2xl font-extrabold text-white tracking-tight">Growth & AI Marketing</h1>
+          <p class="text-sm text-slate-400 mt-0.5">Converting aggregator demand into direct loyalty with zero commissions.</p>
+        </div>
+
+        <div class="inline-flex p-1 bg-slate-900 border border-slate-800 rounded-xl self-start sm:self-auto">
+          <button onclick="switchMarketingTab('acquire')" id="mkt-tab-acquire" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-[#FF5722] text-white">Acquire</button>
+          <button onclick="switchMarketingTab('retain')" id="mkt-tab-retain" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white">Retain</button>
+          <button onclick="switchMarketingTab('campaigns')" id="mkt-tab-campaigns" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white">Campaigns (3)</button>
+        </div>
+      </div>
+
+      <div id="mkt-panel-acquire" class="space-y-6">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+            <span class="text-xs text-slate-400">Direct App CAC</span>
+            <div class="text-2xl font-black text-emerald-400">₹48</div>
+            <p class="text-xs text-slate-400 font-medium">Aggregator CPA is ₹146</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+            <span class="text-xs text-slate-400">Direct Channel GMV</span>
+            <div class="text-2xl font-black text-white">₹61.4L</div>
+            <p class="text-xs text-emerald-400 font-medium">Zero commissions paid</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+            <span class="text-xs text-slate-400">Blended ROAS</span>
+            <div class="text-2xl font-black text-white">8.4x</div>
+            <p class="text-xs text-slate-400 font-medium">WhatsApp direct API</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+            <span class="text-xs text-slate-400">Direct Margin</span>
+            <div class="text-2xl font-black text-emerald-400">24.8%</div>
+            <p class="text-xs text-slate-400 font-medium">vs 7.1% on aggregators</p>
+          </div>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-3">
+          <h3 class="text-base font-bold text-white">Bangalore Pin Code Demand Heatmap</h3>
+          <div class="space-y-2 text-xs">
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 flex justify-between"><span>560034 Koramangala</span><span class="text-orange-400 font-bold">Midnight Surge (98%)</span></div>
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 flex justify-between"><span>560102 HSR Layout</span><span class="text-emerald-400 font-bold">Lunch Tech Peak (96%)</span></div>
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 flex justify-between"><span>560038 Indiranagar</span><span class="text-white font-bold">Evening Tiffin (86%)</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 5: PARTNER BANK FINANCE ================= -->
+    <section id="view-finance" class="view-panel hidden space-y-6 pb-12">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+        <div>
+          <h1 class="text-2xl font-extrabold text-white tracking-tight">Partner Bank Embedded Finance</h1>
+          <p class="text-sm text-slate-400 mt-0.5">Underwriting working capital and EWA via verified kitchen cash flows.</p>
+        </div>
+
+        <div class="inline-flex p-1 bg-slate-900 border border-slate-800 rounded-xl self-start sm:self-auto">
+          <button onclick="switchFinanceSegment('kitchen')" id="fin-seg-kitchen" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-indigo-600 text-white">Kitchen Partner</button>
+          <button onclick="switchFinanceSegment('rider')" id="fin-seg-rider" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white">Delivery Rider</button>
+          <button onclick="switchFinanceSegment('inclusion')" id="fin-seg-inclusion" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white">Inclusion</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+          <span class="text-xs text-slate-400">Available Credit Line</span>
+          <div class="text-2xl font-black text-indigo-400">₹5,00,000</div>
+          <p class="text-xs text-slate-400 font-medium">11.2% p.a. pre-approved</p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+          <span class="text-xs text-slate-400">Credit Score (AA Verified)</span>
+          <div class="text-2xl font-black text-emerald-400">784</div>
+          <p class="text-xs text-slate-400 font-medium">Zero paperwork required</p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+          <span class="text-xs text-slate-400">Today's Settlement</span>
+          <div class="text-2xl font-black text-white">₹38,450</div>
+          <p class="text-xs text-emerald-400 font-medium">T+0 direct clearing</p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-1">
+          <span class="text-xs text-slate-400">Hospital Cover</span>
+          <div class="text-2xl font-black text-emerald-400">₹5,00,000</div>
+          <p class="text-xs text-slate-400 font-medium">Cashless policy active</p>
+        </div>
+      </div>
+
+      <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
+        <div class="flex justify-between items-center">
+          <h3 class="text-base font-bold text-white">Settlement & Working Capital Disbursal</h3>
+          <button onclick="alert('Instant T+0 settlement of ₹38,450 dispatched to registered HDFC Current Account!')" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold shadow">
+            Trigger Instant T+0 Settlement →
+          </button>
+        </div>
+        <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 text-xs flex justify-between">
+          <span>Account Aggregator Data Rail:</span>
+          <span class="text-emerald-400 font-semibold">Consent Active & Encrypted</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= SLIDE-OVER NOTIFICATIONS DRAWER ================= -->
+  <div id="notification-drawer" class="fixed inset-0 z-50 overflow-hidden hidden">
+    <div onclick="toggleDrawer('notification-drawer')" class="absolute inset-0 bg-black/60 backdrop-blur-xs"></div>
+    <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+      <div class="w-screen max-w-md bg-[#0A192F] border-l border-slate-800 p-5 flex flex-col justify-between overflow-y-auto space-y-4">
+        <div class="space-y-4">
+          <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+            <h3 class="font-bold text-white text-base">Operational Alerts (3)</h3>
+            <button onclick="toggleDrawer('notification-drawer')" class="text-slate-400 hover:text-white">✕</button>
+          </div>
+          <div class="p-3 bg-amber-950/30 border border-amber-500/40 rounded-xl text-xs space-y-1">
+            <p class="font-bold text-amber-300">Late Kitchen Prep: #GF-9481</p>
+            <p class="text-slate-400">Elapsed 14m / SLA 12m at Koramangala Hub.</p>
+          </div>
+          <div class="p-3 bg-rose-950/30 border border-rose-500/40 rounded-xl text-xs space-y-1">
+            <p class="font-bold text-rose-300">Low Stock: Thermal Coffee Flasks</p>
+            <p class="text-slate-400">Only 18 flasks remaining (reorder threshold 50).</p>
+          </div>
+        </div>
+        <button onclick="toggleDrawer('notification-drawer')" class="w-full py-2 bg-slate-800 text-white rounded-xl text-xs">Close Panel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SLIDE-OVER ACTIVITY DRAWER ================= -->
+  <div id="activity-drawer" class="fixed inset-0 z-50 overflow-hidden hidden">
+    <div onclick="toggleDrawer('activity-drawer')" class="absolute inset-0 bg-black/60 backdrop-blur-xs"></div>
+    <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+      <div class="w-screen max-w-md bg-[#0A192F] border-l border-slate-800 p-5 flex flex-col justify-between overflow-y-auto space-y-4">
+        <div class="space-y-4">
+          <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+            <h3 class="font-bold text-white text-base">Live Cross-View System Activity</h3>
+            <button onclick="toggleDrawer('activity-drawer')" class="text-slate-400 hover:text-white">✕</button>
+          </div>
+          <div class="space-y-2 text-xs">
+            <div class="p-3 bg-slate-900 border border-slate-800 rounded-xl space-y-1">
+              <span class="text-orange-400 font-bold">Rider Ramesh Kumar Accepted #GF-9481</span>
+              <p class="text-slate-400 font-mono text-[11px]">Kitchen Koramangala notified. Customer tracker updated to "Preparing".</p>
+            </div>
+            <div class="p-3 bg-slate-900 border border-slate-800 rounded-xl space-y-1">
+              <span class="text-emerald-400 font-bold">Customer Placed Order via Direct App</span>
+              <p class="text-slate-400 font-mono text-[11px]">Falcon Credits +26 credited. Kitchen ticket printed.</p>
+            </div>
+          </div>
+        </div>
+        <button onclick="toggleDrawer('activity-drawer')" class="w-full py-2 bg-slate-800 text-white rounded-xl text-xs">Close Activity Stream</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="mt-auto border-t border-slate-800 py-6 bg-[#0A192F] text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center space-x-2">
+        <span class="font-bold text-white">Growth Falcon</span>
+        <span>• Prototype for MBA case competition. All data simulated.</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="growth-falcon-app.html" download="growth-falcon-app.html" class="text-orange-400 hover:underline font-semibold">Download This App (.html)</a>
+        <span>Bengaluru, India</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= JAVASCRIPT STATE ENGINE ================= -->
+  <script>
+    let currentView = 'overview';
+    let demoActive = false;
+    let demoInterval = null;
+    let cartItems = [
+      { name: 'Royal Karnataka Utsav Thali', price: 329, qty: 1 },
+      { name: 'Malgudi Filter Coffee Flask', price: 199, qty: 1 }
+    ];
+    let riderFlowStep = 1;
+
+    function switchView(viewName) {
+      currentView = viewName;
+      document.querySelectorAll('.view-panel').forEach(el => el.classList.add('hidden'));
+      document.getElementById('view-' + viewName).classList.remove('hidden');
+
+      document.querySelectorAll('.nav-tab').forEach(el => {
+        el.classList.remove('bg-[#FF5722]', 'text-white');
+        el.classList.add('text-slate-300');
+      });
+      const activeNav = document.getElementById('nav-btn-' + viewName);
+      if (activeNav) {
+        activeNav.classList.remove('text-slate-300');
+        activeNav.classList.add('bg-[#FF5722]', 'text-white');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchOverviewTab(tabName) {
+      ['summary', 'unit_economics', 'how_it_works'].forEach(t => {
+        document.getElementById('ov-panel-' + t).classList.add('hidden');
+        document.getElementById('ov-tab-' + t).classList.remove('bg-[#FF5722]', 'text-white');
+        document.getElementById('ov-tab-' + t).classList.add('text-slate-400');
+      });
+      document.getElementById('ov-panel-' + tabName).classList.remove('hidden');
+      document.getElementById('ov-tab-' + tabName).classList.add('bg-[#FF5722]', 'text-white');
+    }
+
+    function switchCustomerTab(tabName) {
+      ['order', 'track', 'wallet', 'reviews'].forEach(t => {
+        document.getElementById('cust-panel-' + t).classList.add('hidden');
+        document.getElementById('cust-tab-' + t).classList.remove('bg-[#FF5722]', 'text-white');
+        document.getElementById('cust-tab-' + t).classList.add('text-slate-400');
+      });
+      document.getElementById('cust-panel-' + tabName).classList.remove('hidden');
+      document.getElementById('cust-tab-' + tabName).classList.add('bg-[#FF5722]', 'text-white');
+    }
+
+    function switchKitchenTab(tabName) {
+      ['live_orders', 'performance', 'inventory', 'hygiene', 'fleet'].forEach(t => {
+        document.getElementById('kt-panel-' + t).classList.add('hidden');
+        document.getElementById('kt-tab-' + t).classList.remove('bg-[#FF5722]', 'text-white');
+        document.getElementById('kt-tab-' + t).classList.add('text-slate-400');
+      });
+      document.getElementById('kt-panel-' + tabName).classList.remove('hidden');
+      document.getElementById('kt-tab-' + tabName).classList.add('bg-[#FF5722]', 'text-white');
+    }
+
+    function switchMarketingTab(tabName) {
+      ['acquire', 'retain', 'campaigns'].forEach(t => {
+        const el = document.getElementById('mkt-panel-' + t);
+        if (el) el.classList.add('hidden');
+        const tabEl = document.getElementById('mkt-tab-' + t);
+        if (tabEl) {
+          tabEl.classList.remove('bg-[#FF5722]', 'text-white');
+          tabEl.classList.add('text-slate-400');
+        }
+      });
+      document.getElementById('mkt-panel-' + tabName).classList.remove('hidden');
+      document.getElementById('mkt-tab-' + tabName).classList.add('bg-[#FF5722]', 'text-white');
+    }
+
+    function switchFinanceSegment(segName) {
+      ['kitchen', 'rider', 'inclusion'].forEach(s => {
+        document.getElementById('fin-seg-' + s).classList.remove('bg-indigo-600', 'text-white');
+        document.getElementById('fin-seg-' + s).classList.add('text-slate-400');
+      });
+      document.getElementById('fin-seg-' + segName).classList.add('bg-indigo-600', 'text-white');
+    }
+
+    function switchRiderSub(subName) {
+      ['home', 'orders', 'earnings', 'safety', 'profile'].forEach(s => {
+        const el = document.getElementById('rider-sub-' + s);
+        if (el) el.classList.add('hidden');
+      });
+      const target = document.getElementById('rider-sub-' + subName);
+      if (target) target.classList.remove('hidden');
+    }
+
+    function advanceRiderFlow() {
+      riderFlowStep = (riderFlowStep % 3) + 1;
+      const title = document.getElementById('rider-step-title');
+      const btn = document.getElementById('rider-step-action-btn');
+      if (riderFlowStep === 1) {
+        title.innerText = 'Go to Kitchen Hub';
+        btn.innerText = 'I Have Arrived at Kitchen →';
+      } else if (riderFlowStep === 2) {
+        title.innerText = 'Pickup Verification';
+        btn.innerText = 'Confirm Picked Up →';
+      } else {
+        title.innerText = 'Deliver & Verify OTP';
+        btn.innerText = 'Complete Delivery (OTP 9481) →';
+      }
+    }
+
+    function advanceOrderStatus() {
+      const prep = document.getElementById('track-step-prep');
+      const ride = document.getElementById('track-step-ride');
+      const drop = document.getElementById('track-step-drop');
+      if (ride.classList.contains('text-slate-500')) {
+        ride.className = 'p-3.5 rounded-xl border border-orange-500 bg-orange-950/30 text-orange-300 ring-1 ring-orange-500';
+      } else if (drop.classList.contains('text-slate-500')) {
+        drop.className = 'p-3.5 rounded-xl border border-emerald-500 bg-emerald-950/30 text-emerald-300 ring-1 ring-emerald-500';
+      } else {
+        alert('Order Delivered successfully! You earned ₹26 Falcon Coins.');
+      }
+    }
+
+    function addToCart(dishName, price) {
+      cartItems.push({ name: dishName, price: price, qty: 1 });
+      const total = cartItems.reduce((s, i) => s + i.price, 0);
+      document.getElementById('cart-count').innerText = cartItems.length + ' items';
+      document.getElementById('cart-total').innerText = '₹' + total;
+      alert(`Added ${dishName} to Falcon Basket!`);
+    }
+
+    function checkoutOrder() {
+      alert('Order placed successfully via Instant UPI! Switched to live tracking.');
+      switchCustomerTab('track');
+    }
+
+    function toggleDrawer(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.toggle('hidden');
+    }
+
+    function toggleDemoMode() {
+      demoActive = !demoActive;
+      const btn = document.getElementById('demo-toggle-btn');
+      const statusText = document.getElementById('demo-status-text');
+      if (demoActive) {
+        statusText.innerText = 'BURST';
+        btn.classList.add('bg-emerald-600', 'text-white', 'animate-pulse');
+        demoInterval = setInterval(() => {
+          const kpi = document.getElementById('ov-kpi-orders');
+          if (kpi) {
+            let val = parseInt(kpi.innerText.replace(/,/g, '')) + 1;
+            kpi.innerText = val.toLocaleString();
+          }
+        }, 3000);
+      } else {
+        statusText.innerText = 'OFF';
+        btn.classList.remove('bg-emerald-600', 'text-white', 'animate-pulse');
+        clearInterval(demoInterval);
+      }
+    }
+  </script>
+</body>
+</html>
